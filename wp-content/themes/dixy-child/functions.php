@@ -40,24 +40,19 @@ function delete_specific_files() {
     // List of files to delete
     $files_to_delete = [
         ABSPATH . 'license.txt',
-		ABSPATH . 'readme.html',
-		ABSPATH . 'wp-config-sample.php',
+        ABSPATH . 'readme.html',
+        ABSPATH . 'wp-config-sample.php',
         ABSPATH . 'xmlrpc.php'
     ];
 
     // Loop through each file and attempt to delete it
     foreach ($files_to_delete as $file) {
         if (file_exists($file)) {
-            if (unlink($file)) {
-                error_log(basename($file) . ' has been deleted successfully.');
-            } else {
-                error_log('Error: Unable to delete ' . basename($file) . '.');
-            }
-        } else {
-            error_log(basename($file) . ' does not exist.');
+            unlink($file);
         }
     }
 }
+
 add_action('init', 'delete_specific_files');
 
 
