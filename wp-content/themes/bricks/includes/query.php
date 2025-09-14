@@ -286,7 +286,7 @@ class Query {
 	 *
 	 * @since 1.8
 	 */
-	public static function prepare_query_vars_from_settings( $settings = [], $fallback_element_id = '', $element_name = '' ) {
+	public static function prepare_query_vars_from_settings( $settings = [], $fallback_element_id = '', $element_name = '', $skip_main_query = false ) {
 		$object_type = self::get_query_object_type();
 		$element_id  = self::get_query_element_id();
 
@@ -537,11 +537,13 @@ class Query {
 				 *
 				 * @since 1.7: Merge query only if 'disable_query_merge' control is not set!
 				 * @since 1.9.9: Merge query only if 'woo_disable_query_merge' control is not set! (Products element)
+				 * @since 2.0: Do not merge if skip_main_query is true (#86c42z22c; #86c3zyd4z; @see database.php)
 				 */
 				if ( $merge_query &&
 					( is_archive() || is_author() || is_search() || is_home() ) &&
 					empty( $query_vars['disable_query_merge'] ) &&
-					empty( $query_vars['woo_disable_query_merge'] )
+					empty( $query_vars['woo_disable_query_merge'] ) &&
+					! $skip_main_query
 				) {
 					global $wp_query;
 

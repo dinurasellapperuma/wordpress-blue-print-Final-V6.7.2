@@ -100,6 +100,7 @@ class License {
 			[
 				'active',       // Active license
 				'processed',    // Order processed
+				'canceled',     // Subscription cancelled, but not 'refunded' (@since 1.12.5)
 				'past_due',     // Payment past due (subscription)
 				'error_remote', // Remote server error (bricksbuilder.io)
 			]

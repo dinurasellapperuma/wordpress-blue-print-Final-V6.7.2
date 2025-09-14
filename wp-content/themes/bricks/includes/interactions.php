@@ -19,7 +19,7 @@ class Interactions {
 		// Add popup interactions (template settings) to popup root
 		add_filter( 'bricks/popup/attributes', [ $this, 'add_to_template_root' ], 10, 2 );
 
-		$this->set_controls();
+		add_action( 'init', [ $this, 'set_controls' ], 10 );
 
 		self::get_global_class_interactions();
 	}

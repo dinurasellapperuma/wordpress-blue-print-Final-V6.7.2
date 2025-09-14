@@ -271,7 +271,8 @@ class Database {
 						self::$main_query_id = $element_id;
 
 						// Use the prepared query vars instead of raw element settings (@since 1.8)
-						$query_vars = Query::prepare_query_vars_from_settings( $element['settings'], $element_id, $element['name'] );
+						// Skip merge main query 4th parameter (true) (#86c42z22c; #86c3zyd4z; @since 2.x)
+						$query_vars = Query::prepare_query_vars_from_settings( $element['settings'], $element_id, $element['name'], true );
 
 						// Check if user set offset (@since 1.10.2)
 						$has_offset = isset( $query_vars['offset'] ) && $query_vars['offset'] > 0;
